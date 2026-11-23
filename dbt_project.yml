@@ -30,6 +30,8 @@ models:
 seeds:
   ecom_margins:
     +schema: seeds
+    +quote_columns: false
     ad_cost_pct_monthly:
       +column_types:
         order_month: date
+        

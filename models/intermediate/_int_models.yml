@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: int_order_payment_fees
+    description: "Comision de pago por item, repartida desde el total del pedido segun el precio"
+    columns:
+      - name: order_item_key
+        tests: [unique, not_null]
+      - name: payment_fee
+        tests: [not_null]
+
+  - name: int_order_channel
+    description: "Canal de adquisicion simulado por pedido, asignado por hash de order_id"
+    columns:
+      - name: order_id
+        description: "Unico: cada pedido cae en un solo canal"
+        tests: [unique, not_null]
+      - name: channel
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['organic', 'google_ads', 'meta_ads', 'email']
+
+  - name: int_ad_cost_allocated
+    description: "Costo de publicidad por item segun canal y mes del pedido"
+    columns:
+      - name: order_item_key
+        tests: [unique, not_null]
+      - name: ad_cost
+        tests: [not_null]
