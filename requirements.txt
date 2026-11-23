@@ -1,0 +1,5 @@
+﻿dbt-core<2
+dbt-snowflake<2
+snowflake-cli
+pandas
+numpy
