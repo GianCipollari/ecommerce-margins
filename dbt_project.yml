@@ -1,0 +1,35 @@
+name: ecom_margins
+version: "1.0.0"
+config-version: 2
+
+profile: ecom_margins
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+# Supuestos que no viven en seeds (ver docs/assumptions.md)
+vars:
+  shipping_cost_ratio: 1.15   # el envio le cuesta a la tienda 15% mas de lo que cobra
+
+models:
+  ecom_margins:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  ecom_margins:
+    +schema: seeds
+    ad_cost_pct_monthly:
+      +column_types:
+        order_month: date
