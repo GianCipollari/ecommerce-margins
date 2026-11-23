@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: olist
+    description: "Datos crudos de Olist (Kaggle), cargados con scripts/02_load_raw.sql"
+    database: ECOM_MARGINS
+    schema: RAW
+    tables:
+      - name: orders
+        description: "Un pedido por fila, con estado y fechas del ciclo de vida"
+      - name: order_items
+        description: "Un item por fila: producto, vendedor, precio y flete"
+      - name: order_payments
+        description: "Pagos de cada pedido; un pedido puede tener varios pagos"
+      - name: products
+        description: "Catalogo de productos con su categoria en portugues"
+      - name: customers
+        description: "Clientes con ciudad y estado; customer_unique_id identifica recompras"
+      - name: sellers
+        description: "Vendedores con ciudad y estado"
+      - name: product_category_translation
+        description: "Traduccion de categorias de portugues a ingles"
