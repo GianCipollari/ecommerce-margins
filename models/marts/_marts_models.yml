@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: fct_order_item_margins
+    description: >
+      Margen de contribucion (CM1, CM2, CM3) por item de pedido entregado.
+      Supuestos de costos en docs/assumptions.md.
+    columns:
+      - name: order_item_key
+        tests: [unique, not_null]
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+      - name: channel
+        tests: [not_null]
+      - name: cogs_pct
+        description: "Si es nulo, hay una categoria sin supuesto de costo"
+        tests: [not_null]
+      - name: revenue
+        tests: [not_null]
+      - name: cm1
+        tests: [not_null]
+      - name: cm2
+        tests: [not_null]
+      - name: cm3
+        tests: [not_null]
+
+  - name: dim_products
+    description: "Productos con categoria en ingles y supuesto de costo"
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: dim_customers
+    description: "Clientes por pedido con ubicacion"
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
