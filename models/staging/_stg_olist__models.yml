@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_olist__orders
+    description: "Pedidos de Olist, todos los estados, con fechas casteadas y bandera is_delivered"
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+
+  - name: stg_olist__order_items
+    description: "Items de pedido con precio y flete"
+    columns:
+      - name: order_item_key
+        description: "order_id + numero de item: clave unica del item"
+        tests: [unique, not_null]
+
+  - name: stg_olist__order_payments
+    description: "Pagos por pedido y medio de pago"
+    columns:
+      - name: payment_key
+        tests: [unique, not_null]
+
+  - name: stg_olist__products
+    description: "Productos con categoria en portugues ('unknown' si falta)"
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: stg_olist__customers
+    description: "Clientes por pedido con ubicacion"
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+
+  - name: stg_olist__sellers
+    description: "Vendedores con ubicacion"
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
