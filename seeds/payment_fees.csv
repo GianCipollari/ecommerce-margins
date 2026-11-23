@@ -1,0 +1,6 @@
+payment_type,fee_pct,installment_fee_pct
+credit_card,0.035,0.008
+debit_card,0.015,0.0
+boleto,0.01,0.0
+voucher,0.0,0.0
+not_defined,0.0,0.0

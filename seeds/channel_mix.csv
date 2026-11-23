@@ -1,0 +1,5 @@
+channel,weight,bucket_from,bucket_to
+organic,0.4,0,39
+google_ads,0.3,40,69
+meta_ads,0.2,70,89
+email,0.1,90,99
