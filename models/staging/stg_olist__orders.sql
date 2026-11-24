@@ -9,10 +9,10 @@ select
     customer_id,
     order_status,
     order_status = 'delivered'                              as is_delivered,
-    order_purchase_timestamp::timestamp_ntz                 as purchased_at,
-    order_approved_at::timestamp_ntz                        as approved_at,
-    order_delivered_carrier_date::timestamp_ntz             as shipped_at,
-    order_delivered_customer_date::timestamp_ntz            as delivered_at,
-    order_estimated_delivery_date::timestamp_ntz            as estimated_delivery_at,
+    order_purchase_timestamp::timestamp                 as purchased_at,
+    order_approved_at::timestamp                        as approved_at,
+    order_delivered_carrier_date::timestamp             as shipped_at,
+    order_delivered_customer_date::timestamp            as delivered_at,
+    order_estimated_delivery_date::timestamp            as estimated_delivery_at,
     date_trunc('month', order_purchase_timestamp)::date     as order_month
 from source

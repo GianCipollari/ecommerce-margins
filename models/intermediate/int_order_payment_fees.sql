@@ -32,8 +32,10 @@ select
     i.order_item_key,
     i.order_id,
     coalesce(o.order_payment_fee, 0)                                    as order_payment_fee,
-    ratio_to_report(i.price) over (partition by i.order_id)             as price_share,
+    coalesce(i.price / nullif(sum(i.price) over (partition by i.order_id), 0), 0)
+                                                                        as price_share,
     coalesce(o.order_payment_fee, 0)
-        * ratio_to_report(i.price) over (partition by i.order_id)       as payment_fee
+        * coalesce(i.price / nullif(sum(i.price) over (partition by i.order_id), 0), 0)
+                                                                        as payment_fee
 from items i
 left join order_fees o on i.order_id = o.order_id

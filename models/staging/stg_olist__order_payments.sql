@@ -4,10 +4,10 @@ with source as (
 )
 
 select
-    order_id || '-' || payment_sequential                   as payment_key,
+    order_id || '-' || payment_sequential::varchar                  as payment_key,
     order_id,
     payment_sequential::int                                 as payment_sequence,
     payment_type,
     payment_installments::int                               as installments,
-    payment_value::number(12, 2)                            as payment_value
+    payment_value::decimal(12, 2)                            as payment_value
 from source

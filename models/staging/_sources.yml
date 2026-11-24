@@ -2,9 +2,11 @@ version: 2
 
 sources:
   - name: olist
-    description: "Datos crudos de Olist (Kaggle), cargados con scripts/02_load_raw.sql"
+    description: "Datos crudos de Olist (Kaggle). En Snowflake: tablas de RAW cargadas con scripts/02_load_raw.sql. En DuckDB: se leen directo de los CSV de data/raw."
     database: ECOM_MARGINS
     schema: RAW
+    meta:
+      external_location: "data/raw/olist_{name}_dataset.csv"   # solo lo usa DuckDB
     tables:
       - name: orders
         description: "Un pedido por fila, con estado y fechas del ciclo de vida"
@@ -20,3 +22,5 @@ sources:
         description: "Vendedores con ciudad y estado"
       - name: product_category_translation
         description: "Traduccion de categorias de portugues a ingles"
+        meta:
+          external_location: "data/raw/product_category_name_translation.csv"

@@ -1,5 +1,6 @@
 -- Canal de adquisicion simulado de cada pedido (Olist no lo informa).
--- El hash de order_id da un numero fijo de 0 a 99, que cae en el rango de un canal.
+-- El md5 de order_id da un numero fijo de 0 a 99 (macro channel_bucket), que cae
+-- en el rango de un canal. Da el mismo numero en Snowflake y en DuckDB.
 -- Mismo pedido = mismo canal en todas las corridas.
 
 with orders as (
@@ -13,7 +14,7 @@ channel_mix as (
 bucketed as (
     select
         order_id,
-        mod(abs(hash(order_id)), 100) as bucket
+        {{ channel_bucket('order_id') }} as bucket
     from orders
 )
 
